@@ -24,6 +24,7 @@ def test_chromium_dns_rebinding_pinned_single_lookup(appm, hits, monkeypatch):
 def test_guard_is_the_reason_for_the_block(appm, hits, private_ok):
     assert "Hello world" in goto(appm, "http://127.0.0.1:8771/plain") and hits["get"] == 1
 
-def test_snapshot_endpoint_blocks_internal_and_works_when_allowed(client, hits):
+def test_snapshot_endpoint_blocks_internal_and_works_when_allowed(client, hits, appm, monkeypatch):
+    monkeypatch.setattr(appm, 'BROWSER_MODE', 'playwright')
     assert client.get("/api/snapshot?url=http://127.0.0.1:8771/plain").status_code == 400 and hits["get"] == 0
     netguard.ALLOW_PRIVATE = True; r = client.get("/api/snapshot?url=http://127.0.0.1:8771/plain"); assert r.status_code == 200 and r.mimetype == "image/png"

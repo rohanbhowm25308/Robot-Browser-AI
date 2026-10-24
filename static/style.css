@@ -39,3 +39,4 @@ body.noside #side{width:64px}body.noside .brand b,body.noside #nav a span,body.n
 .thumb{max-width:260px;border:1px solid var(--bd);border-radius:6px;margin-top:4px;display:block}.mem{display:flex;justify-content:space-between;gap:8px;padding:8px 10px;background:var(--inp);border-radius:8px;margin:5px 0}
 .b-awaiting_user{color:var(--yel);border-color:#713f12}
 .startpage{background:linear-gradient(180deg,#0b192a,#071321);border:1px solid var(--bd);border-radius:12px;padding:22px;min-height:50vh}.startpage .grid{grid-template-columns:repeat(4,1fr)}.b-incomplete{color:var(--yel);border-color:#713f12}
+.btn:disabled{opacity:.45;cursor:not-allowed}

@@ -73,3 +73,10 @@ python -m pytest -q              # about 1 minute
 
 ## What "verified" means for browser actions
 The system checks real evidence: the HTTP status of requests the agent sent, page text/DOM elements after the action, the URL, and saved files (size + SHA-256). It cannot see outside the browser (confirmation emails, payment settlement, server-side records). The report says so, and a submission with no outcome criterion is never reported as complete.
+
+## Deploying on Render (hosted mode)
+Render is detected automatically (RENDER=true). Hosted mode: password login (APP_PASSWORD is required), no launch-token link, secure cookies, HSTS, rate-limited login, `/healthz` for health checks, only Render's hostname accepted. Chromium is not available on a standard Render Python service, so set BROWSER_MODE=requests: the Browser Agent and Chromium snapshot are disabled (clearly shown in the UI); research, chat, voice, BUSTED, Code Surgeon, GTM, reader browser, Trust Radar and memory all work.
+- Build command: `pip install -r requirements.txt`
+- Start command: `gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 120`   (keep 1 worker: missions run in in-memory threads)
+- Environment: APP_PASSWORD, GROQ_API_KEY, SESSION_SECRET (random), BROWSER_MODE=requests, PYTHON_VERSION=3.12.7
+- Storage is ephemeral unless you add a Render Disk and set DATA_DIR to its mount path (history and generated files are otherwise lost on every deploy/restart).

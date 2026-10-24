@@ -4,6 +4,7 @@ from urllib.parse import urlparse, unquote, urljoin, quote, urlencode
 import requests, pandas as pd
 from bs4 import BeautifulSoup
 from flask import Flask, request, jsonify, send_from_directory, send_file, Response, redirect
+from werkzeug.middleware.proxy_fix import ProxyFix
 from dotenv import load_dotenv
 import netguard, webbrowser
 from netguard import safe_url, http_get
@@ -16,8 +17,10 @@ from openpyxl.styles import Font, PatternFill
 
 load_dotenv()
 BASE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(BASE, "outputs"); os.makedirs(OUT, exist_ok=True)
-DB = os.path.join(BASE, "robot.db")
+DATA = os.getenv("DATA_DIR", BASE); os.makedirs(DATA, exist_ok=True)   # point DATA_DIR at a persistent disk to keep history/files across deploys
+OUT = os.path.join(DATA, "outputs"); os.makedirs(OUT, exist_ok=True)
+DB = os.path.join(DATA, "robot.db")
+HOSTED = os.getenv("HOSTED", "0") == "1" or bool(os.getenv("RENDER"))   # Render sets RENDER=true
 KEY = os.getenv("GROQ_API_KEY", "").strip()
 if KEY.startswith("your_"): KEY = ""
 MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
@@ -28,6 +31,7 @@ BROWSER_MODE = os.getenv("BROWSER_MODE", "playwright").lower(); HEADLESS = os.ge
 UA = {"User-Agent": "Mozilla/5.0 (RobotBrowserAI hackathon agent)"}
 app = Flask(__name__, static_folder="static", static_url_path="/static")
 app.config["MAX_CONTENT_LENGTH"] = 20 * 1024 * 1024
+if HOSTED: app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)   # trust Render's proxy headers (real client IP, https, host)
 LOCK = threading.RLock(); CANCEL = set(); PAUSED = set(); BUSTED = {}
 
 def now(): return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -855,6 +859,7 @@ def proxy():
 def esc_html(t): return t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 @app.get("/api/snapshot")
 def snapshot():
+    if BROWSER_MODE != "playwright": return jsonify(error="Chromium snapshot is not enabled in this deployment (BROWSER_MODE=requests)."), 400
     try:
         u = safe_url(request.args.get("url", ""))
         from playwright.sync_api import sync_playwright
@@ -883,7 +888,7 @@ def selftest():
         from playwright.sync_api import sync_playwright
         with sync_playwright() as p:
             b = launch_guarded(p, True); pg = b.new_page(); pg.goto("https://example.com", timeout=20000); ti = pg.title(); b.close(); return "Chromium opened: " + ti
-    t("Playwright Chromium", pwt)
+    t("Playwright Chromium", pwt if BROWSER_MODE == "playwright" else (lambda: "skipped: BROWSER_MODE=requests (Chromium disabled on purpose)"))
     return jsonify(res)
 # ---------- misc ----------
 @app.get("/api/files")
@@ -892,7 +897,7 @@ def files():
 @app.get("/api/files/<name>")
 def dl(name): return send_from_directory(OUT, name, as_attachment=True)
 @app.get("/api/health")
-def health(): return jsonify(browser_mode=BROWSER_MODE, headless=HEADLESS, groq_key_set=bool(KEY), model=MODEL, vision_kind="vision", stt_model=STT)
+def health(): return jsonify(hosted=HOSTED, browser_mode=BROWSER_MODE, headless=HEADLESS, groq_key_set=bool(KEY), model=MODEL, vision_model=VISION, stt_model=STT)
 @app.errorhandler(Exception)
 def err(e):
     code = getattr(e, "code", 500); return jsonify(error=str(e)), code if isinstance(code, int) else 500
@@ -912,28 +917,44 @@ def api_agent():
         except Exception as e: return jsonify(error=str(e)), 400
     try: ms = int(j.get("max_steps") or 12)
     except ValueError: return jsonify(error="Step limit must be a number"), 400
+    if BROWSER_MODE != "playwright": return jsonify(error="The Browser Agent needs Chromium, which is not enabled in this deployment (BROWSER_MODE=requests). Run the app locally to use it."), 400
     return jsonify(id=new_agent_mission(goal, start, ms, parse_criteria(j.get("criteria", ""))))
-SESSION_TOKEN = secrets.token_hex(24); LAUNCH_TOKEN = os.getenv("LAUNCH_TOKEN") or secrets.token_urlsafe(24); _used = {"launch": False}
+_secret = os.getenv("SESSION_SECRET", ""); SESSION_TOKEN = hmac.new(_secret.encode(), b"rb-session", "sha256").hexdigest() if _secret else secrets.token_hex(24)
+LAUNCH_TOKEN = os.getenv("LAUNCH_TOKEN") or secrets.token_urlsafe(24); _used = {"launch": False}
 APP_PASSWORD = os.getenv("APP_PASSWORD", ""); LOCAL_HOSTS = {"127.0.0.1", "localhost"}
+ALLOWED_HOSTS = {h.strip().lower() for h in os.getenv("ALLOWED_HOSTS", "").split(",") if h.strip()} | ({os.getenv("RENDER_EXTERNAL_HOSTNAME").lower()} if os.getenv("RENDER_EXTERNAL_HOSTNAME") else set())
+FAILS = {}
+def _rate_limited(ip):
+    now = time.time(); FAILS[ip] = [t for t in FAILS.get(ip, []) if now - t < 600]; return len(FAILS[ip]) >= 8
 PAGE = "<body style='background:#071321;color:#f4f7fc;font-family:sans-serif;display:grid;place-items:center;height:100vh;margin:0'><div style='background:#14263b;padding:28px;border-radius:12px;max-width:460px'><h3>Robot Browser AI</h3>%s</div></body>"
 LOCKED_HTML = PAGE % "<p>Access is locked. Open the app with the one-time link printed in the terminal when you start it (<code>python app.py</code> opens it automatically), or from the desktop app.</p>"
 LOGIN_HTML = PAGE % "<form method=post action=/login><!--e--><input type=hidden name=token value='__T__'><input type=password name=password placeholder=Password autofocus style='padding:10px;border-radius:8px;border:1px solid #20354b;background:#10243a;color:#fff'> <button style='padding:10px 16px;border:0;border-radius:8px;background:#1677ff;color:#fff'>Unlock</button></form>"
 def _authed(): return hmac.compare_digest(request.cookies.get("rb_session", ""), SESSION_TOKEN)
 def _token_ok(t): return bool(t) and not _used["launch"] and hmac.compare_digest(str(t), LAUNCH_TOKEN)
+@app.get("/healthz")
+def healthz(): return "ok"
 @app.before_request
 def security_gate():
+    if request.path == "/healthz": return None
     host = (request.host or "").rsplit(":", 1)[0].lower()
-    if host not in LOCAL_HOSTS: return jsonify(error="Forbidden host"), 403
+    if host not in LOCAL_HOSTS and host not in ALLOWED_HOSTS: return jsonify(error="Forbidden host"), 403
     if request.method not in ("GET", "HEAD", "OPTIONS"):
         o = request.headers.get("Origin")
         if o and urlparse(o).netloc != request.host: return jsonify(error="Cross-origin request blocked"), 403
     if request.path in ("/", "/login") or request.path.startswith("/static/"): return None
     if request.method not in ("GET", "HEAD", "OPTIONS") and request.headers.get("X-RB") != "1": return jsonify(error="Missing request header"), 403
-    if not _authed(): return jsonify(error="Not authenticated - reload the page / use the launch link"), 401
-def _cookie(resp): resp.set_cookie("rb_session", SESSION_TOKEN, httponly=True, samesite="Strict", max_age=86400); return resp
+    if not _authed(): return jsonify(error="Not authenticated - reload the page and log in"), 401
+@app.after_request
+def hosted_headers(resp):
+    if HOSTED:
+        for k, v in (("Strict-Transport-Security", "max-age=31536000"), ("X-Content-Type-Options", "nosniff"), ("X-Frame-Options", "SAMEORIGIN"), ("Referrer-Policy", "same-origin")): resp.headers.setdefault(k, v)
+    return resp
+def _cookie(resp): resp.set_cookie("rb_session", SESSION_TOKEN, httponly=True, samesite="Strict", secure=HOSTED, max_age=86400); return resp
 @app.get("/")
 def index():
+    if HOSTED and not APP_PASSWORD: return Response(PAGE % "<p>Server is not configured: set the APP_PASSWORD environment variable.</p>", mimetype="text/html", status=503)
     if _authed(): return send_from_directory("static", "index.html")
+    if HOSTED: return Response(LOGIN_HTML.replace("__T__", ""), mimetype="text/html")
     t = request.args.get("token", "")
     if _token_ok(t):
         if APP_PASSWORD: return Response(LOGIN_HTML.replace("__T__", esc_html(t)), mimetype="text/html")
@@ -941,6 +962,12 @@ def index():
     return Response(LOCKED_HTML, mimetype="text/html", status=403)
 @app.post("/login")
 def login():
+    if HOSTED:
+        ip = request.remote_addr or "?"
+        if not APP_PASSWORD: return Response(PAGE % "<p>Server is not configured: set APP_PASSWORD.</p>", mimetype="text/html", status=503)
+        if _rate_limited(ip): return Response(PAGE % "<p>Too many wrong attempts. Try again in 10 minutes.</p>", mimetype="text/html", status=429)
+        if hmac.compare_digest(request.form.get("password", ""), APP_PASSWORD): FAILS.pop(ip, None); return _cookie(redirect("/"))
+        FAILS.setdefault(ip, []).append(time.time()); return Response(LOGIN_HTML.replace("__T__", "").replace("<!--e-->", "<p style='color:#f87171'>Wrong password</p>"), mimetype="text/html", status=401)
     t = request.form.get("token", "")
     if APP_PASSWORD and _token_ok(t) and hmac.compare_digest(request.form.get("password", ""), APP_PASSWORD): _used["launch"] = True; return _cookie(redirect("/"))
     return Response(LOCKED_HTML if not _token_ok(t) else LOGIN_HTML.replace("__T__", esc_html(t)).replace("<!--e-->", "<p style='color:#f87171'>Wrong password</p>"), mimetype="text/html", status=401)

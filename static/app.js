@@ -137,3 +137,5 @@ const DEMO=[["Example Domain","https://example.com","Simple page, good first tes
 $("#tiles").innerHTML=DEMO.map((d,i)=>`<div class="fc" data-demo="${i}"><i data-lucide="${d[1].startsWith("search:")?"search":"globe"}" style="color:var(--ac2)"></i><b>${esc(d[0])}</b><small>${esc(d[2])}</small></div>`).join("");
 $("#tiles").onclick=e=>{const c=e.target.closest("[data-demo]");if(!c)return;const u=DEMO[c.dataset.demo][1];u.startsWith("search:")?searchWeb(u.slice(7)):openUrl(u)};
 $("#startBtn").onclick=showStart;icons();
+
+api("/api/health").then(h=>{if(h.browser_mode!=="playwright"){["#aGo","#snapBtn"].forEach(q=>{const b=$(q);b.disabled=true;b.title="Needs Chromium (not enabled in this deployment)"});$("#aErr").textContent="Browser Agent and Chromium snapshot are disabled in this deployment (no Chromium). Everything else works."}}).catch(()=>{});
