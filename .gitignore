@@ -1,0 +1,12 @@
+cat > .gitignore <<'EOF'
+.env
+robot.db
+outputs/
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
+.venv/
+electron/node_modules/
+.vscode/
+EOF

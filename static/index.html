@@ -1,0 +1,52 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Robot Browser AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+<script src="https://unpkg.com/lucide@0.453.0/dist/umd/lucide.min.js"></script></head>
+<body><div id="app">
+<aside id="side"><div class="brand"><div class="logo">R</div><b>Robot Browser AI</b></div>
+<nav id="nav"></nav>
+<div class="sidefoot"><div class="adal"><i data-lucide="triangle"></i><div><small>Built with</small><br><b>AdaL by Sylph</b></div></div>
+<div class="user"><div class="av">R</div><div><b>Robot User</b><br><small>Free Plan</small></div></div></div></aside>
+<main><header id="top">
+<button class="ib" id="bBack" title="Back"><i data-lucide="arrow-left"></i></button><button class="ib" id="bFwd" title="Forward"><i data-lucide="arrow-right"></i></button><button class="ib" id="bRef" title="Refresh"><i data-lucide="rotate-cw"></i></button>
+<form id="addr"><i data-lucide="search"></i><input id="addrIn" placeholder="Search the web or enter a URL..." autocomplete="off"></form>
+<button class="ib" id="bBm" title="Bookmark this page"><i data-lucide="star"></i></button><button class="ib" data-go="downloads" title="Downloads"><i data-lucide="download"></i></button><div class="av sm">R</div>
+<button class="ib" id="toggleSide" title="Collapse sidebar"><i data-lucide="panel-left"></i></button><button class="ib" id="toggleComp" title="Toggle companion"><i data-lucide="panel-right"></i></button></header>
+<div id="views">
+<section id="v-home" class="view"><div class="hero"><svg class="mtn" viewBox="0 0 1200 260" preserveAspectRatio="none"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1c30"/><stop offset=".75" stop-color="#3a2f55" stop-opacity=".55"/><stop offset="1" stop-color="#7a4a6a" stop-opacity=".35"/></linearGradient></defs><rect width="1200" height="260" fill="url(#sk)"/><path d="M0 200 L110 120 L190 170 L320 70 L430 160 L520 110 L640 190 L760 90 L880 170 L990 105 L1100 160 L1200 120 V260 H0Z" fill="#0d2038" opacity=".9"/><path d="M0 235 L140 175 L260 215 L400 150 L560 225 L700 170 L860 230 L1000 180 L1200 225 V260 H0Z" fill="#081628"/></svg>
+<div class="herotxt"><h1>Welcome to Robot Browser <span class="acc">AI</span></h1><p>Your autonomous AI browser and workspace</p><div class="line"></div></div>
+<form class="cmd" id="cmdForm"><i data-lucide="sparkles"></i><input id="cmdIn" placeholder="Ask anything or give a task..."><button type="button" class="ib mic" title="Voice"><i data-lucide="mic"></i></button><label class="ib" title="Screenshot to Action"><i data-lucide="image"></i><input type="file" accept="image/*" class="shot" hidden></label><label class="ib" title="Attach file for BUSTED AI"><i data-lucide="paperclip"></i><input type="file" class="bfile" hidden></label><button class="send"><i data-lucide="send"></i></button></form>
+<div class="pills" id="pills"></div></div>
+<div class="pad"><div class="sh"><h2>Quick Start</h2></div><div class="grid" id="qs"></div>
+<div class="sh"><h2>Recent Missions</h2><a data-go="history">View All</a></div><div id="recent" class="table"></div></div></section>
+
+<section id="v-browser" class="view pad"><div class="sh"><h2>Browser</h2><button class="btn" id="xrayBtn"><i data-lucide="scan-search"></i> Website X-Ray</button> <button class="btn" id="startBtn"><i data-lucide="layout-grid"></i> Start page</button> <button class="btn" id="snapBtn"><i data-lucide="camera"></i> Chromium snapshot</button> <button class="btn" id="trustBtn"><i data-lucide="shield-check"></i> Trust Radar</button> <button class="btn" id="newTab"><i data-lucide="external-link"></i> Open in real tab</button></div>
+<p class="muted">Pages load through Robot Browser's secure reader (scripts disabled). For JavaScript-heavy sites use "Chromium snapshot" (real Chromium render) or "Open in real tab".</p><div id="start" class="startpage"><h3>Start page</h3><p class="muted">Pick a demo site, or type a URL / search in the address bar. Pages open in the secure reader.</p><div id="tiles" class="grid"></div></div><iframe id="frame" class="hidden" sandbox="allow-same-origin allow-forms allow-popups"></iframe><div id="xray" class="card hidden"></div></section>
+
+<section id="v-chat" class="view pad"><div class="sh"><h2>AI Chat</h2></div><div class="msgs big"></div><form class="chatform"><input placeholder="Type your message..."><button type="button" class="ib mic" title="Voice input"><i data-lucide="mic"></i></button><label class="ib" title="Screenshot to Action"><i data-lucide="image"></i><input type="file" accept="image/*" class="shot" hidden></label><label class="ib" title="Attach file for BUSTED AI"><i data-lucide="paperclip"></i><input type="file" class="bfile" hidden></label><button class="send"><i data-lucide="send"></i></button></form></section>
+
+<section id="v-missions" class="view pad"><div class="sh"><h2>Missions</h2></div><div class="two"><div id="mlist" class="card"></div><div id="mdetail" class="card"><p class="muted">Select a mission, or start one from Research.</p></div></div></section>
+
+<section id="v-research" class="view pad"><div class="sh"><h2>Research to Excel</h2></div><div class="card"><p class="muted">Describe a research task. The agent shows a plan and risks first (Ghost Twin preview). Nothing runs until you approve.</p><textarea id="rPrompt" rows="3" placeholder="Research 3 AI startups in India, compare their products, pricing and target customers, and create an Excel report"></textarea><select id="rCouncil"><option value="full">AI Council: full (Critic + grounding check)</option><option value="critic">AI Council: Critic only</option><option value="off">AI Council: off</option></select><button class="btn pri" id="rGo"><i data-lucide="list-checks"></i> Create plan</button><p id="rErr" class="err"></p></div><div class="sh"><h2>Browser Agent</h2></div><div class="card"><p class="muted">The agent operates a real Chromium window: observe, decide, act, check. Sensitive clicks wait for your approval and it never types passwords. Needs GROQ_API_KEY.</p><input type="text" id="aUrl" placeholder="Start URL (optional), e.g. https://example.com"><textarea id="aGoal" rows="3" placeholder="Goal, e.g. Open the pricing page and tell me the cheapest plan"></textarea><textarea id="aCrit" rows="3" placeholder="Success criteria (optional, one per line):&#10;page contains: Order received&#10;url contains: /thanks&#10;quote: (answer must be backed by a quote)&#10;write succeeded: /book (server accepted the submission)&#10;element exists: #confirmation&#10;element text: #status => Booked&#10;download saved: .pdf&#10;Leave empty and the AI proposes criteria for you to review before anything runs."></textarea><div class="row"><input type="text" id="aSteps" placeholder="Step limit (default 12, max 40)"></div><button class="btn pri" id="aGo"><i data-lucide="bot"></i> Create agent plan</button><p id="aErr" class="err"></p></div></section>
+
+<section id="v-code" class="view pad"><div class="sh"><h2>Code Surgeon</h2></div><div class="card"><div class="row"><select id="cLang"><option>python</option><option>javascript</option><option>typescript</option><option>java</option><option>c++</option></select><input id="cTask" placeholder="Task (optional) e.g. fix the bug in login()"></div><textarea id="cCode" rows="10" placeholder="Paste code here..."></textarea><textarea id="cTests" rows="4" placeholder="Optional: your own tests. Python: from solution import * + asserts. JavaScript: require('./solution'). Leave empty and the AI writes tests."></textarea><label><input type="checkbox" id="cRun"> Run tests on this computer (executes the code locally)</label><br><button class="btn pri" id="cGo"><i data-lucide="stethoscope"></i> Analyze &amp; fix</button><p id="cErr" class="err"></p><div id="cOut"></div></div></section>
+
+<section id="v-gtm" class="view pad"><div class="sh"><h2>GTM Architect</h2></div><div class="card"><textarea id="gIn" rows="4" placeholder="Describe your product, audience and goal..."></textarea><button class="btn pri" id="gGo"><i data-lucide="rocket"></i> Build launch plan</button><p id="gErr" class="err"></p><div id="gOut" class="md"></div></div></section>
+
+<section id="v-busted" class="view pad"><div class="sh"><h2>BUSTED AI <small class="muted">Upload. Investigate. Detect. Correct. Verify.</small></h2></div>
+<div class="card"><label class="drop"><i data-lucide="upload"></i> Upload CSV, Excel, PDF, DOCX, TXT or image<input type="file" id="bFile" hidden></label> <button class="btn" id="bDemo">Try sample file</button><p id="bErr" class="err"></p><div id="bOut"></div></div></section>
+
+<section id="v-history" class="view pad"><div class="sh"><h2>History</h2></div><div id="hist" class="table"></div></section>
+<section id="v-downloads" class="view pad"><div class="sh"><h2>Downloads</h2></div><div id="dls" class="table"></div></section>
+<section id="v-bookmarks" class="view pad"><div class="sh"><h2>Bookmarks</h2></div><div id="bms" class="table"></div></section>
+<section id="v-settings" class="view pad"><div class="sh"><h2>Settings</h2></div><div class="card" id="setBox"></div></section>
+</div></main>
+
+<aside id="comp"><div class="ch"><b>AI Companion</b><i data-lucide="settings" data-go="settings" class="click"></i></div>
+<div class="idcard"><div class="orb">R</div><div><b>Robot AI</b><br><span class="online">● Online</span><br><small>Your autonomous browsing, research and coding companion.</small></div></div>
+<div class="tabs" id="ctabs"><button data-t="chat" class="on">Chat</button><button data-t="plan">Plan</button><button data-t="tools">Tools</button><button data-t="assets">Assets</button></div>
+<div id="tab-chat" class="tab on"><div class="msgs"></div><div id="sugg"></div></div>
+<div id="tab-plan" class="tab"></div><div id="tab-tools" class="tab"></div><div id="tab-assets" class="tab"></div>
+<form class="chatform" id="cform"><input placeholder="Type your message..."><button type="button" class="ib mic"><i data-lucide="mic"></i></button><label class="ib"><i data-lucide="image"></i><input type="file" accept="image/*" class="shot" hidden></label><label class="ib"><i data-lucide="paperclip"></i><input type="file" class="bfile" hidden></label><button class="send"><i data-lucide="send"></i></button></form></aside>
+</div><script src="/static/app.js"></script></body></html>
