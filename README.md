@@ -1,85 +1,561 @@
-# Robot Browser AI
-AI-native browser workspace (HTML/CSS/JS + Flask + Groq). Built with AdaL by Sylph (development tool, not a runtime dependency).
+#  Robot Browser AI
 
-## Run
+<div align="center">
+
+### The Next Generation of Intelligent Browsing
+
+**Browse Smarter. Automate Faster. Verify Everything.**
+
+An AI-native browser workspace that combines autonomous web automation, intelligent agents, multimodal AI assistance, research workflows, and document integrity analysis into one unified platform.
+
+**Built for HackBriven Build Arena | Developed with AdaL by Sylph**
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Launch_Application-00C896?style=for-the-badge&logo=render&logoColor=white)](https://robot-browser-ai.onrender.com/)
+[![GitHub](https://img.shields.io/badge/GitHub-Source_Code-181717?style=for-the-badge&logo=github)](https://github.com/rohanbhowm25308/Robot-Browser-AI)
+[![Python](https://img.shields.io/badge/Python-Backend-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![Electron](https://img.shields.io/badge/Electron-Desktop-47848F?style=flat-square&logo=electron&logoColor=white)](https://electronjs.org)
+[![Playwright](https://img.shields.io/badge/Playwright-Automation-2EAD33?style=flat-square)](https://playwright.dev)
+[![LangGraph](https://img.shields.io/badge/LangGraph-Agentic_AI-7C3AED?style=flat-square)](https://langchain-ai.github.io/langgraph/)
+
+**[🌐 Live Website](https://robot-browser-ai.onrender.com/) | [💻 Source Code](https://github.com/rohanbhowm25308/Robot-Browser-AI) | [🐛 Report an Issue](https://github.com/rohanbhowm25308/Robot-Browser-AI/issues)**
+
+</div>
+
+---
+
+## 🌟 Overview
+
+Traditional browsers help users access information. **Robot Browser AI goes a step further by helping users take action on that information.**
+
+Instead of manually navigating websites, collecting research, creating spreadsheets, and reviewing documents, users can describe their goals in natural language and work with AI-powered tools.
+
+Robot Browser AI brings together:
+
+- Autonomous browser agents powered by Playwright.
+- Intelligent task planning and multi-agent collaboration.
+- Research-to-Excel automation.
+- Evidence-based task verification.
+- Voice, image, and screenshot assistance.
+- AI-powered code analysis and debugging.
+- **BUSTED AI**, a document and data integrity investigation engine.
+- User approvals, recovery workflows, and mission history.
+
+The platform is designed around a simple principle:
+
+> **AI should not only suggest what to do. It should help execute tasks, show evidence, and keep the user in control.**
+
+---
+
+## 🚀 Live Demo
+
+### 🌐 Experience Robot Browser AI
+
+**Website:** https://robot-browser-ai.onrender.com/
+
+The hosted application provides access to the Robot Browser AI workspace and supported cloud-compatible features.
+
+**Important:** The hosted Render version and the desktop application have different capabilities. Full interactive Chromium automation requires the appropriate local desktop environment. On the standard Render deployment, browser-agent and Chromium-snapshot functionality may be disabled.
+
+For the complete local browser automation experience, follow the desktop installation instructions below.
+
+---
+
+## ✨ Key Features
+
+### 1.  Autonomous Browser Agent
+
+An intelligent browser automation system designed to interpret user instructions and interact with websites.
+
+**Capabilities:**
+- Natural-language task instructions.
+- Playwright-powered browser navigation.
+- Page observation and action planning.
+- Multi-step task execution.
+- DOM and page-content inspection.
+- User approval for sensitive actions.
+- Outcome verification using available evidence.
+
+The browser agent follows an iterative workflow:
+
+**Observe → Plan → Act → Verify → Continue**
+
+### 2.  AI Task Planner
+
+Converts user goals into structured execution plans.
+
+- Breaks complex tasks into manageable steps.
+- Identifies required tools and resources.
+- Presents execution plans for review.
+- Tracks progress through mission stages.
+- Supports configurable task limits.
+
+### 3.  Proof-of-Work Engine
+
+Designed to make AI automation more transparent.
+
+Instead of reporting success based only on generated text, the system records available execution evidence.
+
+- Source URLs and timestamps.
+- Browser action history.
+- Page-content evidence.
+- HTTP and DOM-based verification.
+- Downloaded-file checks.
+- Mission status and failure reasons.
+
+Verification is limited to evidence the system can actually observe.
+
+### 4.  Phoenix Recovery Engine
+
+Helps missions recover from interruptions and failures.
+
+- Retry handling.
+- Alternative-source selection.
+- Incomplete-task reporting.
+- Mission continuation from checkpoints.
+- Error tracking and recovery information.
+
+### 5.  Ghost Twin Browser
+
+Preview-oriented workflow for safer task execution.
+
+- Review planned actions.
+- Inspect potential risks.
+- Approve execution before proceeding.
+- Maintain user control over consequential actions.
+
+### 6.  AI Council Mode
+
+A collaborative agent workflow built around research quality and verification.
+
+**Researcher Agent:** Collects and structures information.
+
+**Critic Agent:** Identifies incomplete, uncertain, or questionable findings.
+
+**Verifier Agent:** Checks available evidence and generated outputs.
+
+The research workflow uses LangGraph for multi-stage orchestration.
+
+### 7.  Research-to-Excel Automation
+
+Turn a research request into a structured spreadsheet workflow.
+
+**Example task:**
+
+> Research five AI startups, collect their websites and publicly available product information, and organize the results into an Excel workbook.
+
+**Workflow:**
+
+1. Understand the research goal.
+2. Generate a task plan.
+3. Request execution approval.
+4. Search and inspect relevant sources.
+5. Extract structured information.
+6. Generate an Excel workbook.
+7. Reopen the workbook for validation.
+8. Provide the resulting file and execution evidence.
+
+### 8.  Multimodal AI Companion
+
+Interact with Robot Browser AI using multiple input methods.
+
+- Natural-language chat.
+- Voice input.
+- Screenshot-based assistance.
+- Image understanding.
+- File-based analysis.
+- Contextual task suggestions.
+
+Voice processing and vision capabilities use supported AI integrations.
+
+### 9.  Code Surgeon
+
+An AI-assisted code investigation and debugging workspace.
+
+**Capabilities:**
+- Code explanation.
+- Bug identification.
+- Suggested fixes.
+- Code-difference previews.
+- Python syntax validation.
+- Optional before-and-after test execution.
+
+**Security note:** Optional code execution is not a hardened sandbox. Only run trusted code in a controlled local environment.
+
+### 10.  GTM Launch Architect
+
+An AI assistant for go-to-market research and planning.
+
+- Market research.
+- Competitor analysis.
+- Audience identification.
+- Positioning ideas.
+- Marketing strategies.
+- Launch-plan generation.
+
+### 11.  Mission Replay, History & Forking
+
+Keep track of automation workflows.
+
+- Mission execution history.
+- Recorded actions and outcomes.
+- Mission continuation.
+- Forking workflows with revised assumptions.
+- Error and verification logs.
+
+### 12.  Trust Radar & Agent Memory
+
+Additional tools for responsible AI browsing.
+
+**Trust Radar**
+- Website security indicators.
+- Suspicious URL detection.
+- Prompt-injection risk signals.
+- Look-alike and questionable-content warnings.
+
+**Agent Memory**
+- Optional local memory.
+- User-controlled settings.
+- Deletable stored context.
+
+---
+
+##  BUSTED AI — Document & Data Integrity Engine
+
+### Upload. Investigate. Detect. Correct. Verify.
+
+**BUSTED AI** is a document investigation and validation feature built into Robot Browser AI.
+
+It helps users identify inconsistencies, questionable claims, calculation errors, and data-quality problems.
+
+###  Supported Formats
+
+| Format | Analysis |
+|---|---|
+| PDF | Text extraction and claim investigation |
+| CSV | Structured data validation |
+| Excel | Spreadsheet consistency and arithmetic checks |
+| DOCX | Document text and claim analysis |
+| TXT | Text-based investigation |
+| Images | AI-assisted content examination |
+
+###  Detection Capabilities
+
+- Missing and duplicate values.
+- Arithmetic inconsistencies.
+- Unexpected outliers.
+- Data-quality problems.
+- Suspicious claims requiring review.
+- Evidence-backed factual contradictions where reliable sources are available.
+
+###  Verification Signals
+
+| Signal | Meaning |
+|---|---|
+| 🟢 Green | Applicable validation checks passed |
+| 🔴 Red | Confirmed inconsistency or error |
+| 🟡 Yellow | Suspicious finding requiring investigation |
+| ⚪ Gray | Insufficient evidence to verify |
+
+**Important:** BUSTED AI does not guarantee that a document is genuine or legally authentic. Its findings describe the results of specific automated checks and available evidence.
+
+###  Intelligent Correction Workflow
+
+**Upload → Analyze → Identify Issues → Review Corrections → Recheck → Generate Report**
+
+BUSTED AI can suggest corrections and rerun applicable validation checks after changes.
+
+A corrected validation result does not independently establish the authenticity of the original document.
+
+---
+
+## 🏗️ System Architecture
+
+```text
+                   ROBOT BROWSER AI
+                          |
+            +-------------+-------------+
+            |                           |
+       Web Interface               Electron App
+       HTML / CSS / JS             Desktop Shell
+            |                           |
+            +-------------+-------------+
+                          |
+                    Flask Backend
+                          |
+        +-----------------+-----------------+
+        |                 |                 |
+   AI Orchestration   Browser Engine   File Processing
+        |                 |                 |
+   Groq + LangGraph     Playwright      Pandas / PyMuPDF
+        |                 |                 |
+   Planning / Council  Navigation       OpenPyXL / DOCX
+        |                 |                 |
+        +-----------------+-----------------+
+                          |
+               Verification & Security
+                          |
+             NetGuard / Trust Radar
+                          |
+                  SQLite Storage
+                          |
+               Missions / Evidence
 ```
-python -m venv venv && venv\Scripts\activate      # Windows (Linux/Mac: source venv/bin/activate)
+
+---
+
+##  Technology Stack
+
+| Layer | Technologies |
+|---|---|
+| Frontend | HTML5, CSS3, JavaScript |
+| Desktop Application | Electron, Node.js |
+| Backend | Python, Flask |
+| AI Integration | Groq API |
+| Agent Orchestration | LangGraph |
+| Browser Automation | Playwright, Chromium |
+| Data Processing | Pandas |
+| Excel Processing | OpenPyXL |
+| PDF Processing | PyMuPDF |
+| Document Processing | python-docx |
+| Web Parsing | Beautiful Soup |
+| Database | SQLite |
+| Testing | Pytest |
+| Cloud Deployment | Render |
+| AI Development Assistance | AdaL by Sylph |
+
+---
+
+##  Installation & Setup
+
+### Prerequisites
+
+- Python 3.12 or a compatible version.
+- Node.js and npm for Electron.
+- Git.
+- A Groq API key for AI-powered functionality.
+- Playwright Chromium for local browser automation.
+
+### Step 1 — Clone the Repository
+
+```bash
+git clone https://github.com/rohanbhowm25308/Robot-Browser-AI.git
+cd Robot-Browser-AI
+```
+
+### Step 2 — Create a Virtual Environment
+
+**Windows PowerShell:**
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+**Linux / macOS:**
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### Step 3 — Install Dependencies
+
+```bash
 pip install -r requirements.txt
-playwright install chromium
-# open .env and paste your key:  GROQ_API_KEY=gsk_...
+```
+
+### Step 4 — Install Playwright Chromium
+
+```bash
+python -m playwright install chromium
+```
+
+### Step 5 — Configure Environment Variables
+
+Copy `.env.example` to `.env` and configure the required values.
+
+For example:
+
+```env
+GROQ_API_KEY=your_groq_api_key_here
+APP_PASSWORD=your_local_password
+```
+
+Use the existing `.env.example` as the authoritative reference for additional configuration.
+
+Never commit real API keys, passwords, or session secrets.
+
+### Step 6 — Start the Backend
+
+```bash
 python app.py
 ```
-Open http://127.0.0.1:5000
 
-## Features (all wired to real backend code)
-- Research-to-Excel mission: plan -> Ghost Twin preview -> approve -> web search -> open real pages -> extract -> Excel -> read-back verification
-- Proof-of-Work timeline (sources, timestamps, results), pause / manual takeover / cancel, Phoenix recovery (retry, then switch source), mission fork
-- AI Council: Researcher (extraction), Critic (flags Unknown/partial rows), Verifier (re-reads the Excel file)
-- Voice (Whisper via Groq), Screenshot to Action (Groq vision; suggestions only), AI chat
-- Code Surgeon (LLM review + diff + real Python syntax check), GTM Architect, Website X-Ray
-- BUSTED AI: CSV/Excel arithmetic, duplicate, missing, outlier checks; PDF/DOCX/TXT/image claim checking with web evidence; correct + recheck; report download
+The local application uses a one-time launch link for authenticated access. Follow the link printed by the application.
 
-## Test the failure path
-Unset the key -> chat returns a clear error; missions still run but mark fields Unknown. Use a bad topic or offline network -> mission ends "failed" with the reason logged.
+### Step 7 — Launch the Electron Desktop App
 
-## AdaL evidence
-Record your AdaL sessions (screen recording) while you modify/debug this code, and keep the screenshots in /docs.
+Open another terminal:
 
-## Real browser automation (Playwright)
-BROWSER_MODE=playwright (default) launches a visible Chromium window during research missions and saves a screenshot of every page (shown in the mission timeline). Set HEADLESS=true to hide it, or BROWSER_MODE=requests for plain HTTP. If Chromium is missing, the mission logs a warning and falls back automatically.
-
-## Desktop app (Electron)
+```bash
+cd electron
+npm install
+npm start
 ```
-cd electron && npm install && npm start
-```
-It starts the Flask backend itself and opens Robot Browser AI in a desktop window.
 
-## Also included
-Trust Radar (prompt-injection / HTTPS / look-alike / hype scan on every page the agent opens, plus a Browser-view button), Agent Memory (Settings; local, opt-in, deletable), AI Council modes (full / critic / off) with a grounding check, mission fork with assumptions, microphone on every chat input.
+The desktop application launches Robot Browser AI in its Electron window.
 
-## Security model
-- App binds to 127.0.0.1 only; requests need a session cookie (set when you open the app) and a localhost Host header; cross-origin POSTs are rejected. Set APP_PASSWORD in .env to also require a password.
-- Every untrusted fetch (reader proxy, research pages, agent navigation) goes through `netguard.py`: URL validation, manual redirect checking, connection pinned to the validated IP (blocks DNS rebinding), private/loopback/link-local addresses blocked, 5-8 MB response cap. Chromium requests are checked one by one (including redirects and sub-resources).
-- Reader proxy: scripts/iframes removed, strict CSP, only HTML, images, PDF and plain text pass through.
-- Residual risk: Chromium resolves DNS itself, so the per-request check there is not IP-pinned. Run on a trusted network.
+---
 
-## Agents
-- Research missions run as a LangGraph graph: collect -> critic -> (revise loop) -> grounding -> verify (with rewrite retry).
-- Browser Agent (Research view): general Playwright agent (observe -> decide -> act -> check). Sensitive clicks need your approval; it refuses password/payment fields; it finishes only with a quote that is found on the real page.
-- Code Surgeon: tick "Run tests" to execute tests on the original and fixed code. "VERIFIED" appears only if tests fail before and pass after. This runs code on your computer (not a hardened sandbox).
-- BUSTED AI: statuses stay separate (verified / confirmed error / suspicious / cannot verify). It never claims authenticity.
+##  Automated Testing
 
-## Secure local access (no automatic sessions)
-Starting `python app.py` prints a ONE-TIME launch link and opens it. Opening http://127.0.0.1:5000 directly shows "Locked". The link works once and then becomes invalid; the browser keeps a session cookie until you stop the server. The desktop app generates its own token. With APP_PASSWORD set you need the link AND the password. All state-changing requests also need a custom header, defeating cross-site requests.
+Robot Browser AI includes an automated test suite covering important security, workflow, and validation behavior.
 
-## Chromium network isolation
-Chromium is launched through a local guard proxy (`netguard.py`) that resolves DNS itself, validates every address, connects to the validated IP only and does not bypass loopback. Tests cover loopback, localhost and DNS rebinding.
+Install test dependencies:
 
-## Agent approval policy, criteria and limits
-- Needs your approval: sensitive clicks, any button inside a form, Enter inside a form, and any page-initiated POST/PUT/DELETE (blocked at the network layer until you allow it).
-- Success criteria (page contains / URL contains / quote) are checked by the system after the agent finishes. Review them in the plan before approving. A quote criterion proves the quote exists on a visited page, not that the answer is semantically correct.
-- Step limit is configurable (3-40). If it is reached (or the agent gets stuck) the mission is INCOMPLETE with a report and can be continued from a checkpoint. Logins and form values are not restored on continue.
-
-## Desktop app link policy
-`electron/urlpolicy.js` allows only http(s), no embedded credentials, no localhost/private/internal hosts (DNS-checked), and asks you to confirm before `shell.openExternal`.
-
-## Automated tests
-```
+```bash
 pip install -r requirements-dev.txt
-playwright install chromium      # browser tests are skipped automatically if Chromium is missing
-python -m pytest -q              # about 1 minute
 ```
-71 tests cover: launch-token auth, request guards, SSRF/redirect/size/DNS-rebinding protection (Python and real Chromium), reader proxy rules, Trust Radar, LangGraph council loop, Phoenix recovery, Excel verification, agent approvals (form submit, Enter, page JS writes, downloads, passwords), exactly-once writes, success-criteria verification (HTTP status, element, URL, text, download), step limit and checkpoint continue, BUSTED checks and corrections, Code Surgeon verdicts, Electron URL policy, and frontend id consistency. The suite uses local test servers and a scripted AI, so it needs no internet or API key. The self-test in Settings covers the live parts (Groq, search, real sites).
 
-## What "verified" means for browser actions
-The system checks real evidence: the HTTP status of requests the agent sent, page text/DOM elements after the action, the URL, and saved files (size + SHA-256). It cannot see outside the browser (confirmation emails, payment settlement, server-side records). The report says so, and a submission with no outcome criterion is never reported as complete.
+Run the test suite:
 
-## Deploying on Render (hosted mode)
-Render is detected automatically (RENDER=true). Hosted mode: password login (APP_PASSWORD is required), no launch-token link, secure cookies, HSTS, rate-limited login, `/healthz` for health checks, only Render's hostname accepted. Chromium is not available on a standard Render Python service, so set BROWSER_MODE=requests: the Browser Agent and Chromium snapshot are disabled (clearly shown in the UI); research, chat, voice, BUSTED, Code Surgeon, GTM, reader browser, Trust Radar and memory all work.
-- Build command: `pip install -r requirements.txt`
-- Start command: `gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 120`   (keep 1 worker: missions run in in-memory threads)
-- Environment: APP_PASSWORD, GROQ_API_KEY, SESSION_SECRET (random), BROWSER_MODE=requests, PYTHON_VERSION=3.12.7
-- Storage is ephemeral unless you add a Render Disk and set DATA_DIR to its mount path (history and generated files are otherwise lost on every deploy/restart).
+```bash
+python -m pytest -q
+```
 
-## Public demo mode (no password) - PUBLIC_DEMO=1
-Set `PUBLIC_DEMO=1` on Render to open the site to everyone with no login (APP_PASSWORD is then ignored). Every visitor gets a private session: missions, history, BUSTED results and downloads are visible only to that visitor. Safeguards: per-IP rate limits on AI calls (25/10 min), page fetching (120/10 min) and mission starts (6/10 min); max 2 missions running at once; Agent Memory and the self-test are disabled. All visitors share YOUR Groq API key, so the limits reduce but do not remove the risk of someone using up your quota. To lock the site again: remove PUBLIC_DEMO and set APP_PASSWORD.
+### Test Coverage Areas
+
+- Authentication and session handling.
+- Network request safeguards.
+- Browser automation approvals.
+- Task verification criteria.
+- Agent recovery and continuation.
+- Research and spreadsheet validation.
+- BUSTED AI checks and corrections.
+- Code Surgeon validation.
+- Electron URL security.
+- Frontend consistency.
+
+The repository documents **71 test cases**. Actual pass, fail, and skip counts depend on the installed dependencies and test environment.
+
+Automated tests supplement, but do not replace, live browser and AI integration testing.
+
+---
+
+## 🔐 Security & Responsible Automation
+
+Robot Browser AI is designed to keep users informed and in control of automated actions.
+
+Key safeguards include:
+
+- Local session authentication.
+- Approval checkpoints for sensitive browser actions.
+- Restrictions on password and payment-field interactions.
+- Network request validation.
+- Private-address and redirect protections.
+- Controlled external-link opening.
+- Mission cancellation and recovery.
+- Evidence-based completion reporting.
+- Rate limits for public demo mode.
+
+**Limitations:** AI outputs may contain errors. Web verification cannot always establish real-world outcomes, and code execution must not be treated as securely sandboxed.
+
+---
+
+##  Cloud Deployment
+
+Robot Browser AI is deployed on Render.
+
+**Live Demo:** https://robot-browser-ai.onrender.com/
+
+The hosted version is designed for accessible web-based demonstrations, including supported research, chat, analysis, and BUSTED AI workflows.
+
+### Hosted vs. Desktop
+
+| Capability | Hosted Web Demo | Local Desktop |
+|---|---|---|
+| AI Chat | Supported with configuration | Supported |
+| BUSTED AI | Supported | Supported |
+| Research Workflows | Supported with hosted limitations | Supported |
+| Code Analysis | Supported with limitations | Supported |
+| Full Chromium Browser Agent | Not available in standard hosted configuration | Available |
+| Electron Desktop Window | No | Yes |
+
+Some capabilities depend on configured API keys, installed browser binaries, and runtime resources.
+
+---
+
+##  Developed with AdaL by Sylph
+
+Robot Browser AI was developed with assistance from **AdaL by Sylph**, used as an AI development tool rather than a required application runtime dependency.
+
+AdaL-assisted development activities include project inspection, code analysis, environment setup, and test-workflow assistance.
+
+The development workflow emphasizes:
+
+1. Reviewing the existing codebase.
+2. Identifying implementation risks.
+3. Checking project dependencies.
+4. Running automated tests.
+5. Reviewing findings and recommended improvements.
+6. Documenting actual development evidence.
+
+Development screenshots, session recordings, and test logs can be maintained in a dedicated `docs/` evidence directory.
+
+**AdaL acknowledgment:** https://adal.sylph.ai/
+
+---
+
+##  Project Objectives
+
+Robot Browser AI aims to demonstrate how AI-native browsing can improve productivity while maintaining user oversight.
+
+The project focuses on:
+
+- Reducing repetitive browser tasks.
+- Making autonomous actions observable.
+- Combining multiple AI tools in one workspace.
+- Turning web research into usable deliverables.
+- Helping users investigate document and data inconsistencies.
+- Improving trust through verification and transparency.
+
+---
+
+## 👨‍💻 Developer
+
+**Rohan Bhowmik**
+
+B.Tech — Computer Science & Engineering
+
+Interested in Artificial Intelligence, Machine Learning, Data Science, Generative AI, and Web Devloper.
+
+[![GitHub](https://img.shields.io/badge/GitHub-rohanbhowm25308-181717?style=flat-square&logo=github)](https://github.com/rohanbhowm25308)
+
+**Project Repository:** https://github.com/rohanbhowm25308/Robot-Browser-AI
+
+**Live Application:** https://robot-browser-ai.onrender.com/
+
+---
+
+## ⭐ Support the Project
+
+If you find Robot Browser AI interesting or useful:
+
+-  Star the repository.
+-  Fork the project.
+-  Report issues.
+-  Share ideas for improvements.
+
+Your feedback helps make AI-powered browsing more reliable, transparent, and useful.
+
+---
+
+<div align="center">
+
+### 🤖 Robot Browser AI
+
+**From Browsing to Autonomous Action.**
+
+*Think. Plan. Execute. Verify.*
+
+**Made with ❤️, Python, AI Agents, and AdaL-assisted development.**
