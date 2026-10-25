@@ -80,3 +80,6 @@ Render is detected automatically (RENDER=true). Hosted mode: password login (APP
 - Start command: `gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 120`   (keep 1 worker: missions run in in-memory threads)
 - Environment: APP_PASSWORD, GROQ_API_KEY, SESSION_SECRET (random), BROWSER_MODE=requests, PYTHON_VERSION=3.12.7
 - Storage is ephemeral unless you add a Render Disk and set DATA_DIR to its mount path (history and generated files are otherwise lost on every deploy/restart).
+
+## Public demo mode (no password) - PUBLIC_DEMO=1
+Set `PUBLIC_DEMO=1` on Render to open the site to everyone with no login (APP_PASSWORD is then ignored). Every visitor gets a private session: missions, history, BUSTED results and downloads are visible only to that visitor. Safeguards: per-IP rate limits on AI calls (25/10 min), page fetching (120/10 min) and mission starts (6/10 min); max 2 missions running at once; Agent Memory and the self-test are disabled. All visitors share YOUR Groq API key, so the limits reduce but do not remove the risk of someone using up your quota. To lock the site again: remove PUBLIC_DEMO and set APP_PASSWORD.

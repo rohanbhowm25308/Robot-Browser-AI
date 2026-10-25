@@ -119,7 +119,7 @@ LOAD.settings=async()=>{const h=await api("/api/health");const on=localStorage.g
  <h3>Agent Memory</h3><p class="muted">Stored only in your local database. Used in chat only when enabled. Never store passwords here.</p><label><input type="checkbox" id="memOn" ${on?"checked":""}> Use memory in chat</label>
  <div class="row"><input id="memIn" placeholder="e.g. I prefer concise answers; my startup targets Indian SMBs"><button class="btn" id="memAdd">Add</button></div><div id="memList"></div><button class="btn red" id="memClear">Delete all memory</button>
  <p class="muted">Built with AdaL by Sylph (development tool; not a runtime dependency).</p>`;
- const draw=async()=>{const l=await api("/api/memory");$("#memList").innerHTML=l.map(m=>`<div class="mem"><span>${esc(m.text)}</span><button class="btn" data-del="${m.id}">Delete</button></div>`).join("")||'<p class="muted">No memory saved.</p>'};draw();
+ const draw=async()=>{let l=[];try{l=await api("/api/memory")}catch(e){$("#memList").innerHTML=`<p class="muted">${esc(e.message)}</p>`;["#memIn","#memAdd","#memClear","#memOn"].forEach(q=>$(q)&&$(q).classList.add("hidden"));return}$("#memList").innerHTML=l.map(m=>`<div class="mem"><span>${esc(m.text)}</span><button class="btn" data-del="${m.id}">Delete</button></div>`).join("")||'<p class="muted">No memory saved.</p>'};draw();
  $("#memOn").onchange=e=>localStorage.setItem("memon",e.target.checked?"1":"0");
  $("#memAdd").onclick=async()=>{const t=$("#memIn").value;if(!t.trim())return;await post("/api/memory",{text:t});$("#memIn").value="";draw()};
  $("#memList").onclick=async e=>{const d=e.target.closest("[data-del]");if(d){await api("/api/memory?id="+d.dataset.del,{method:"DELETE"});draw()}};
