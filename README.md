@@ -10,14 +10,12 @@ An AI-native browser workspace that combines autonomous web automation, intellig
 
 **Built for HackBriven Build Arena | Developed with AdaL by Sylph**
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Launch_Application-00C896?style=for-the-badge&logo=render&logoColor=white)](https://robot-browser-ai.onrender.com/)
-[![GitHub](https://img.shields.io/badge/GitHub-Source_Code-181717?style=for-the-badge&logo=github)](https://github.com/rohanbhowm25308/Robot-Browser-AI)
 [![Python](https://img.shields.io/badge/Python-Backend-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![Electron](https://img.shields.io/badge/Electron-Desktop-47848F?style=flat-square&logo=electron&logoColor=white)](https://electronjs.org)
 [![Playwright](https://img.shields.io/badge/Playwright-Automation-2EAD33?style=flat-square)](https://playwright.dev)
 [![LangGraph](https://img.shields.io/badge/LangGraph-Agentic_AI-7C3AED?style=flat-square)](https://langchain-ai.github.io/langgraph/)
 
-**[🌐 Live Website](https://robot-browser-ai.onrender.com/) | [💻 Source Code](https://github.com/rohanbhowm25308/Robot-Browser-AI) | [🐛 Report an Issue](https://github.com/rohanbhowm25308/Robot-Browser-AI/issues)**
+**[🌐 Live Website](https://robot-browser-ai.onrender.com/) | [💻 Source Code](https://github.com/rohanbhowm25308/Robot-Browser-AI) |**
 
 </div>
 
@@ -526,10 +524,6 @@ B.Tech — Computer Science & Engineering
 Interested in Artificial Intelligence, Machine Learning, Data Science, Generative AI, and Web Devloper.
 
 [![GitHub](https://img.shields.io/badge/GitHub-rohanbhowm25308-181717?style=flat-square&logo=github)](https://github.com/rohanbhowm25308)
-
-**Project Repository:** https://github.com/rohanbhowm25308/Robot-Browser-AI
-
-**Live Application:** https://robot-browser-ai.onrender.com/
 
 ---
 
