@@ -46,11 +46,7 @@ The platform is designed around a simple principle:
 
 ---
 
-## 🚀 Live Demo
-
 ### 🌐 Experience Robot Browser AI
-
-**Website:** https://robot-browser-ai.onrender.com/
 
 The hosted application provides access to the Robot Browser AI workspace and supported cloud-compatible features.
 
