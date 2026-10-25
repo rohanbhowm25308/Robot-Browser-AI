@@ -524,6 +524,7 @@ B.Tech — Computer Science & Engineering
 Interested in Artificial Intelligence, Machine Learning, Data Science, Generative AI, and Web Devloper.
 
 [![GitHub](https://img.shields.io/badge/GitHub-rohanbhowm25308-181717?style=flat-square&logo=github)](https://github.com/rohanbhowm25308)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect_with_Me-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rohan-bhowmik-b014473a1/)
 
 ---
 
